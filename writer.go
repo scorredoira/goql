@@ -20,7 +20,7 @@ type writer struct {
 
 	// In namespace mode any table can be read. This allows to write also to other
 	// namespaces.
-	NamespaceWriteAll bool
+	WriteAnyNamespace bool
 
 	// A namespace prefixes all table names with it.
 	// A namespace must contain at least one '_'. If the table name already has one
@@ -1134,7 +1134,7 @@ func (p *writer) addNamespace(table string, isWrite bool) (string, error) {
 		return p.namespaceToSQL(p.Namespace) + "_" + table, nil
 	}
 
-	if isWrite && !p.NamespaceWriteAll {
+	if isWrite && !p.WriteAnyNamespace {
 		if !strings.HasPrefix(table, p.Namespace+":") {
 			return "", fmt.Errorf("Invalid table prefix for a write query: " + table)
 		}

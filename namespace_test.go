@@ -292,7 +292,7 @@ func testNamespace(query, expected, database, namespace string, writeAll bool, s
 
 	w := NewWriter(q, nil, database, "sqlite3")
 	w.Namespace = namespace
-	w.NamespaceWriteAll = writeAll
+	w.WriteAnyNamespace = writeAll
 	w.EscapeIdents = false
 	query, _, err = w.Write()
 
